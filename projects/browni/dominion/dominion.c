@@ -762,6 +762,9 @@ int feastCardEffect(struct gameState *state, int currentPlayer, int choice1, int
   return 0;
 }
 
+/**
+ * Handles card effect for "mine"
+ */
 int mineCardEffect(
   struct gameState *state, int currentPlayer, int choice1, int choice2, int handPos
 ) {
