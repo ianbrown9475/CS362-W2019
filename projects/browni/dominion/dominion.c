@@ -665,7 +665,7 @@ int adventurerCardEffect(struct gameState *state, int currentPlayer, int handPos
       z++;
     }
   }
-  while (z > 0) {
+  while (z >= 0) {
     // discard all cards in play that have been drawn
     state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z - 1];
     z = z - 1;
@@ -690,7 +690,7 @@ int council_roomCardEffect(struct gameState *state, int currentPlayer, int handP
   state->numBuys++;
 
   // each other player draws a card
-  for (i = 0; i < state->numPlayers; i++) {
+  for (i = 1; i < state->numPlayers; i++) {
     if (i != currentPlayer) {
       drawCard(i, state);
     }
@@ -724,7 +724,7 @@ int feastCardEffect(struct gameState *state, int currentPlayer, int choice1, int
   updateCoins(currentPlayer, state, 5);
   x = 1; // condition to loop on
   while (x == 1) { // buy one card
-    if (supplyCount(choice1, state) <= 0){
+    if (supplyCount(choice1, state) >= 0){
       printf("None of that card left, sorry!\n");
       if (DEBUG) {
         printf("Cards Left: %d\n", supplyCount(choice1, state));
@@ -788,7 +788,7 @@ int mineCardEffect(
   gainCard(choice2, state, 2, currentPlayer);
 
   // discard played card
-  discardCard(handPos, currentPlayer, state, 0);
+  discardCard(handPos, currentPlayer, state, 1);
 
   // discard trashed card
   for (i = 0; i < state->handCount[currentPlayer]; i++) {
