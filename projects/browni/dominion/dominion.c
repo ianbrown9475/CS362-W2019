@@ -715,7 +715,7 @@ int feastCardEffect(struct gameState *state, int currentPlayer, int choice1, int
   // gain card with cost up to 5
 
   // back up hand
-  for (i = 0; i <= state->handCount[currentPlayer]; i++) {
+  for (i = 0; i < state->handCount[currentPlayer]; i++) {
     temphand[i] = state->hand[currentPlayer][i]; // back up card
     state->hand[currentPlayer][i] = -1; // set to nothing
   }
@@ -755,7 +755,7 @@ int feastCardEffect(struct gameState *state, int currentPlayer, int choice1, int
   }
 
   // reset hand
-  for (i = 0; i <= state->handCount[currentPlayer]; i++) {
+  for (i = 0; i < state->handCount[currentPlayer]; i++) {
     state->hand[currentPlayer][i] = temphand[i];
     temphand[i] = -1;
   }
