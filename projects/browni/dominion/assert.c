@@ -16,10 +16,10 @@ void assertEqual(int actual, int expected, int *failures, int line) {
   }
 }
 
-void printFailures(int failures) {
+void printFailures(int failures, char *file) {
   if (failures) {
-    printf("TEST FAILED: %d failures encountered\n", failures);
+    printf("TEST FAILED: %d failure(s) encountered in file %s\n", failures, file);
   } else {
-    printf("TEST SUCCESSFUL\n");
+    printf("TEST SUCCESSFUL in file %s\n", file);
   }
 }

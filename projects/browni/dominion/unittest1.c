@@ -21,5 +21,5 @@ int main() {
   int result = numHandCards(g);
   assertEqual(result, testHandSize, &failures, __LINE__);
 
-  printFailures(failures);
+  printFailures(failures, __FILE__);
 }

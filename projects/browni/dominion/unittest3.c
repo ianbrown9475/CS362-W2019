@@ -47,5 +47,5 @@ int main() {
   assertEqual(g->deckCount[testPlayer], testDeckCount + 1, &failures, __LINE__);
   assertEqual(g->supplyCount[testgainCard], testSupplyCount - 3, &failures, __LINE__);
 
-  printFailures(failures);
+  printFailures(failures, __FILE__);
 }

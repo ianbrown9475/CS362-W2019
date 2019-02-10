@@ -31,5 +31,5 @@ int main() {
   assertEqual(g->hand[testPlayer][testHandCount - 1], testHandCard, &failures, __LINE__);
   assertEqual(g->hand[testPlayer][testHandCount], testDeckCard, &failures, __LINE__);
 
-  printFailures(failures);
+  printFailures(failures, __FILE__);
 }

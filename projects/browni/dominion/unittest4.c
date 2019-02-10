@@ -51,5 +51,5 @@ int main() {
   assertEqual(result, 0, &failures, __LINE__);
   assertEqual(g->coins, testCoins, &failures, __LINE__);
 
-  printFailures(failures);
+  printFailures(failures, __FILE__);
 }
