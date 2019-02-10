@@ -30,6 +30,9 @@ unittest2.o: unittest2.c dominion.o rngs.o assert.o
 unittest3.o: unittest3.c dominion.o rngs.o assert.o
 	gcc -o unittest3.o -g unittest3.c dominion.o rngs.o assert.o $(CFLAGS)
 
+unittest4.o: unittest4.c dominion.o rngs.o assert.o
+	gcc -o unittest4.o -g unittest4.c dominion.o rngs.o assert.o $(CFLAGS)
+
 testAll: dominion.o testSuite.c
 	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
 
