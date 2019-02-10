@@ -18,11 +18,17 @@ badTestDrawCard: badTestDrawCard.c dominion.o rngs.o
 testBuyCard: testDrawCard.c dominion.o rngs.o
 	gcc -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
 
-unittest1.o: unittest1.c dominion.o rngs.o
-	gcc -o unittest1.o -g unittest1.c dominion.o rngs.o $(CFLAGS)
+assert.o: assert.c
+	gcc -c assert.c -g $(CFLAGS)
 
-unittest2.o: unittest2.c dominion.o rngs.o
-	gcc -o unittest2.o -g unittest2.c dominion.o rngs.o $(CFLAGS)
+unittest1.o: unittest1.c dominion.o rngs.o assert.o
+	gcc -o unittest1.o -g unittest1.c dominion.o rngs.o assert.o $(CFLAGS)
+
+unittest2.o: unittest2.c dominion.o rngs.o assert.o
+	gcc -o unittest2.o -g unittest2.c dominion.o rngs.o assert.o $(CFLAGS)
+
+unittest3.o: unittest3.c dominion.o rngs.o assert.o
+	gcc -o unittest3.o -g unittest3.c dominion.o rngs.o assert.o $(CFLAGS)
 
 testAll: dominion.o testSuite.c
 	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)

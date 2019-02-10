@@ -1,21 +1,24 @@
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "assert.h"
 #include "dominion.h"
+#include "dominion_helpers.h"
 
 
 // test drawCard()
 int main() {
   printf("Testing drawCard()\n");
+
+  int failures = 0;
   int testPlayer = 0;
-  int testHandCount = 0;
+  int testHandCount = 1;
   int testDiscardCount = 0;
   int testDeckCount = 1;
-  int testHandCard = 0;
-  int testDeckCard = 1;
-  struct gameState *g = malloc(sizeof(struct gameState));
+  int testHandCard = curse;
+  int testDeckCard = estate;
 
+  struct gameState *g = malloc(sizeof(struct gameState));
   g->handCount[testPlayer] = testHandCount;
   g->discardCount[testPlayer] = testDiscardCount;
   g->deckCount[testPlayer] = testDeckCount;
@@ -23,9 +26,11 @@ int main() {
   g->deck[testPlayer][0] = testDeckCard;
 
   int result = drawCard(testPlayer, g);
-  assert(result == 0);
-  assert(g->handCount[testPlayer] == testHandCount + 1);
-  assert(g->deckCount[testPlayer] == testDeckCount - 1);
-  assert(g->hand[testPlayer][1] == testDeckCard);
-  printf("Test successful\n");
+  assertEqual(result, 0, &failures, __LINE__);
+  assertEqual(g->handCount[testPlayer], testHandCount + 1, &failures, __LINE__);
+  assertEqual(g->deckCount[testPlayer], testDeckCount - 1, &failures, __LINE__);
+  assertEqual(g->hand[testPlayer][testHandCount - 1], testHandCard, &failures, __LINE__);
+  assertEqual(g->hand[testPlayer][testHandCount], testDeckCard, &failures, __LINE__);
+
+  printFailures(failures);
 }
