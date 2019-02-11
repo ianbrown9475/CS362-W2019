@@ -789,12 +789,12 @@ int mineCardEffect(
   gainCard(choice2, state, 2, currentPlayer);
 
   // discard played card
-  discardCard(handPos, currentPlayer, state, 1);
+  discardCard(handPos, currentPlayer, state, 0);
 
-  // discard trashed card
+  // trash card
   for (i = 0; i < state->handCount[currentPlayer]; i++) {
     if (state->hand[currentPlayer][i] == trashCard) {
-      discardCard(i, currentPlayer, state, 0);
+      discardCard(i, currentPlayer, state, 1);
       break;
     }
   }

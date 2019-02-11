@@ -42,6 +42,21 @@ cardtest2.o: cardtest2.c dominion.o rngs.o assert.o
 cardtest3.o: cardtest3.c dominion.o rngs.o assert.o
 	gcc -o cardtest3.o -g cardtest3.c dominion.o rngs.o assert.o $(CFLAGS)
 
+cardtest4.o: cardtest4.c dominion.o rngs.o assert.o
+	gcc -o cardtest4.o -g cardtest4.c dominion.o rngs.o assert.o $(CFLAGS)
+
+unittestresults: unittest1.o unittest2.o unittest3.o unittest4.o cardtest1.o cardtest2.o cardtest3.o cardtest4.o
+	./unittest1.o >> unittestresults.out
+	./unittest2.o >> unittestresults.out
+	./unittest3.o >> unittestresults.out
+	./unittest4.o >> unittestresults.out
+	./cardtest1.o >> unittestresults.out
+	./cardtest2.o >> unittestresults.out
+	./cardtest3.o >> unittestresults.out
+	./cardtest4.o >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+
 testAll: dominion.o testSuite.c
 	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
 
