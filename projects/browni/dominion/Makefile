@@ -57,6 +57,9 @@ unittestresults: unittest1.o unittest2.o unittest3.o unittest4.o cardtest1.o car
 	gcov dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 
+randomtestadventurer.o: randomtestadventurer.c dominion.o rngs.o assert.o
+	gcc -o randomtestadventurer.o -g randomtestadventurer.c dominion.o rngs.o assert.o $(CFLAGS)
+
 testAll: dominion.o testSuite.c
 	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
 
