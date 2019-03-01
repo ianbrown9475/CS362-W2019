@@ -779,7 +779,7 @@ int mineCardEffect(
     return -1;
   }
 
-  if (choice2 > treasure_map || choice2 < curse) {
+  if (choice2 < copper || choice2 > gold) {
     return -1;
   }
 
