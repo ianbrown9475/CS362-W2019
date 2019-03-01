@@ -655,7 +655,8 @@ int adventurerCardEffect(struct gameState *state, int currentPlayer, int handPos
   // discard played card
   discardCard(handPos, currentPlayer, state, 0);
 
-  while (drawntreasure < 2) {
+  int numLoops = state->deckCount[currentPlayer] + state->discardCount[currentPlayer];
+  while (drawntreasure < 2 && z < numLoops) {
     drawCard(currentPlayer, state);
     // top card of hand is most recently drawn card.
     cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1];
