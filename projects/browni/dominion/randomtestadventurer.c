@@ -48,7 +48,9 @@ void test() {
     }
   }
 
-  int treasureCount = 0;
+  printf("maxDrawTreasure: %d\n", maxDrawTreasure);
+
+  int treasureInHand = 0;
   for (int i = 0; i < testHandCount; i++) {
     if (i == adventurerIndex) {
       g->hand[testPlayer][i] = adventurer;
@@ -57,9 +59,11 @@ void test() {
     int card = rand() % (treasure_map + 1);
     g->hand[testPlayer][i] = card;
     if (card == copper || card == silver || card == gold) {
-      treasureCount++;
+      treasureInHand++;
     }
   }
+
+  printf("treasureInHand: %d\n", treasureInHand);
 
   struct gameState *pre = malloc(sizeof(struct gameState));
   memcpy(pre, g, sizeof(struct gameState));
@@ -81,7 +85,7 @@ void test() {
       newTreasureCount++;
     }
   }
-  assertEqual(newTreasureCount, treasureCount + maxDrawTreasure, &failures, __LINE__);
+  assertEqual(newTreasureCount, treasureInHand + maxDrawTreasure, &failures, __LINE__);
   assertEqual(g->handCount[testPlayer], pre->handCount[testPlayer], &failures, __LINE__);
   assertEqual(g->playedCardCount, pre->playedCardCount, &failures, __LINE__);
   assertEqual(g->playedCards[g->playedCardCount - 1], pre->playedCards[pre->playedCardCount - 1], &failures, __LINE__);
@@ -102,6 +106,8 @@ int main() {
   srand(time(NULL));
 
   for (int i = 0; i < numIterations; i++) {
+    printf("Iteration %d\n", i + 1);
     test();
+    printf("\n");
   }
 }

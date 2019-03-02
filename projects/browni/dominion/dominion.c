@@ -773,24 +773,30 @@ int mineCardEffect(
   int i;
   int trashCard;
 
+  if (state->supplyCount[choice2] < 1) {
+    printf("No more of this card in supply\n");
+    return -1;
+  }
+
   trashCard = state->hand[currentPlayer][choice1]; // store card we will trash
 
+  // discard played card
+  discardCard(handPos, currentPlayer, state, 0);
+
   if (trashCard < copper || trashCard > gold) {
+    printf("The card chosen to trash is not a treasure card\n");
     return -1;
   }
 
   if (choice2 < copper || choice2 > gold) {
+    printf("The card chosen to gain is not a treasure card\n");
     return -1;
   }
 
-  if ((getCost(trashCard) + 3) > getCost(choice2)) {
+  if ((getCost(trashCard) + 3) < getCost(choice2)) {
+    printf("The card chosen to gain is too expensive\n");
     return -1;
   }
-
-  gainCard(choice2, state, 2, currentPlayer);
-
-  // discard played card
-  discardCard(handPos, currentPlayer, state, 0);
 
   // trash card
   for (i = 0; i < state->handCount[currentPlayer]; i++) {
@@ -799,7 +805,8 @@ int mineCardEffect(
       break;
     }
   }
-  return 0;
+
+  return gainCard(choice2, state, 2, currentPlayer);
 }
 
 /**

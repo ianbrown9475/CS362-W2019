@@ -10,25 +10,18 @@
 
 void test() {
   int failures = 0;
-  // int testPlayer = 0;
   int testPlayer = rand() % MAX_PLAYERS;
   printf("testPlayer: %d\n", testPlayer);
-  // int testHandCount = 2;
   int testHandCount = rand() % (MAX_HAND / 4 - 2) + 2;
   printf("testHandCount: %d\n", testHandCount);
-  // int testTrashCard = copper;
   int testTrashCard = rand() % (treasure_map + 1);
   printf("testTrashCard: %d\n", testTrashCard);
-  // int testGainCard = silver;
   int testGainCard = rand() % (treasure_map + 1);
   printf("testGainCard: %d\n", testGainCard);
-  // int testDeckCount = 0;
   int testDeckCount = rand() % (MAX_DECK / 4);
   printf("testDeckCount: %d\n", testDeckCount);
-  // int testPlayedCount = 0;
   int testPlayedCount = rand() % (MAX_DECK / 4);
   printf("testPlayedCount: %d\n", testPlayedCount);
-  // int testSupplyCount = 1;
   int testSupplyCount = rand() % (MAX_DECK / 4);
   printf("testSupplyCount: %d\n", testSupplyCount);
   int mineIndex = rand() % testHandCount;
@@ -38,7 +31,6 @@ void test() {
     trashCardIndex = rand() % testHandCount;
   } while (trashCardIndex == mineIndex);
   printf("trashCardIndex: %d\n", trashCardIndex);
-  printf("\n");
 
   struct gameState *g = malloc(sizeof(struct gameState));
   g->handCount[testPlayer] = testHandCount;
@@ -88,10 +80,14 @@ void test() {
 int main() {
   printf("Testing mine\n");
 
+  int numIterations = 100000;
+  printf("Iterating %d times", numIterations);
+
   srand(time(NULL));
 
-  int numIterations = 100000;
   for (int i = 0; i < numIterations; i++) {
+    printf("Iteration %d\n", i + 1);
     test();
+    printf("\n");
   }
 }
