@@ -1,0 +1,60 @@
+Testing mine
+Iterating 100000 times
+Iteration 1
+testPlayer: 3
+testHandCount: 39
+testTrashCard: 5
+testGainCard: 0
+testDeckCount: 17
+testPlayedCount: 68
+testSupplyCount: 100
+mineIndex: 6
+trashCardIndex: 23
+
+Iteration 2
+testPlayer: 1
+testHandCount: 99
+testTrashCard: 23
+testGainCard: 21
+testDeckCount: 79
+testPlayedCount: 121
+testSupplyCount: 68
+mineIndex: 22
+trashCardIndex: 63
+
+Iteration 3
+testPlayer: 0
+testHandCount: 17
+testTrashCard: 21
+testGainCard: 23
+testDeckCount: 38
+testPlayedCount: 117
+testSupplyCount: 43
+mineIndex: 4
+trashCardIndex: 5
+
+Iteration 4
+testPlayer: 2
+testHandCount: 6
+testTrashCard: 12
+testGainCard: 13
+testDeckCount: 53
+testPlayedCount: 90
+testSupplyCount: 33
+mineIndex: 4
+trashCardIndex: 1
+
+Iteration 5
+testPlayer: 2
+testHandCount: 87
+testTrashCard: 4
+testGainCard: 8
+testDeckCount: 9
+testPlayedCount: 75
+testSupplyCount: 46
+mineIndex: 84
+trashCardIndex: 51
+assertEqual failed on line 62: actual value 0 does not equal expected value -1
+assertEqual failed on line 68: actual value 0 does not equal expected value 8
+assertEqual failed on line 71: actual value 4 does not equal expected value 11
+TEST FAILED: 3 failure(s) encountered in file randomtestcard1.c
