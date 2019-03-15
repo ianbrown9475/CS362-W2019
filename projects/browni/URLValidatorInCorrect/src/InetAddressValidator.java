@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ import java.util.List;
  * This class is a Singleton; you can retrieve the instance via the {@link #getInstance()} method.
  * </p>
  *
- * @version $Revision$
+ * @version $Revision: 1783032 $
  * @since Validator 1.4
  */
 public class InetAddressValidator implements Serializable {
