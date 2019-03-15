@@ -29,17 +29,18 @@ public class UrlValidatorTest extends TestCase {
 
     /**
      * Programming based testing
+     *
      * @throws FileNotFoundException if problem occurs when loading csv file
      */
     public void testIsValid() throws FileNotFoundException {
-      List<List<String>> urlTestCases = new ArrayList<>();
+        List<List<String>> urlTestCases = new ArrayList<>();
 
         String fileName = "test/urls.csv";
         Scanner scanner = new Scanner(new File(fileName));
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             List<String> list = Arrays.asList(line.split(","));
-          urlTestCases.add(list);
+            urlTestCases.add(list);
         }
         scanner.close();
 
