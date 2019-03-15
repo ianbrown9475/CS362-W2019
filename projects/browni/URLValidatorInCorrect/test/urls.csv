@@ -1,0 +1,25 @@
+http://,false
+https://www.google.com,true
+http://www.google.com/,true
+lkj;;lkjaeklfjlakjf,false
+http://www.google.com,true
+ftp://www.google.com,true
+ ,false
+`,false
+¶,false
+a:::,false
+file:a,false
+file://test.file:,false
+http://www.google.com?key=val,true
+http://www.google.com?,true
+http://www.google.com? ,false
+http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210],true
+http://[aaaa:aaaa:aaaaaaa],false
+http://google.com:8080,true
+http://google.com:-1,false
+http://google.com:65536,false
+http://google.com:9999999999999999999999999999999999999,false
+http://www.google.com/bad////url,false
+http://www.google.com/../,false
+http://www.google.com///,false
+http://www.google.com/test#anchorName,true
