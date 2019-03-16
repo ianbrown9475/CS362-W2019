@@ -59,6 +59,7 @@ public class UrlValidatorTest extends TestCase {
             boolean res = urlValidator.isValid(list.get(0));
             assertEquals(list.get(2) + ". URL: \"" + list.get(0) + "\"", list.get(1).equals("true"), res);
         });
+        System.out.println("Tested " + urlTestCases.size() + " URLs from file: " + fileName);
 
         // Test URLs from remote web pages
         final String[] REMOTE_URLS = {
