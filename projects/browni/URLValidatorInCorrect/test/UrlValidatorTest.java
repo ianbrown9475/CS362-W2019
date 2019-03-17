@@ -1,3 +1,4 @@
+import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 import java.io.File;
@@ -40,9 +41,14 @@ public class UrlValidatorTest extends TestCase {
      */
     public void testIsValid() throws IOException {
         UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+        List<AssertionFailedError> errors = new ArrayList<>();
 
         // Test a null URL
-        assertFalse(urlValidator.isValid(null));
+        try {
+            assertFalse(urlValidator.isValid(null));
+        } catch (AssertionFailedError e) {
+            errors.add(e);
+        }
 
         // Test URLs from test/urls.csv file
         List<List<String>> urlTestCases = new ArrayList<>();
@@ -57,7 +63,11 @@ public class UrlValidatorTest extends TestCase {
 
         urlTestCases.forEach((list) -> {
             boolean res = urlValidator.isValid(list.get(0));
-            assertEquals(list.get(2) + ". URL: \"" + list.get(0) + "\"", list.get(1).equals("true"), res);
+            try {
+                assertEquals(list.get(2) + ". URL: \"" + list.get(0) + "\"", list.get(1).equals("true"), res);
+            } catch (AssertionFailedError e) {
+                errors.add(e);
+            }
         });
         System.out.println("Tested " + urlTestCases.size() + " URLs from file: " + fileName);
 
@@ -94,9 +104,17 @@ public class UrlValidatorTest extends TestCase {
 
             remoteWebPageUrls.forEach(url -> {
                 boolean res = urlValidator.isValid(url);
-                assertTrue("URL from webPage: \"" + url + "\"", res);
+                try {
+                    assertTrue("URL from webPage: \"" + url + "\"", res);
+                } catch (AssertionFailedError e) {
+                    errors.add(e);
+                }
             });
             System.out.println("Tested " + remoteWebPageUrls.size() + " URLs from remote page: " + remoteUrl);
+        }
+        if (errors.size() > 0) {
+            errors.forEach(e -> System.err.println(e.toString()));
+            fail("Errors were found");
         }
     }
 }
