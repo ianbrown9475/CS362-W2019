@@ -667,7 +667,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card )
     {
     case adventurer:
-		call_adventurer(currentPlayer, drawntreasure, cardDrawn, temphand, state);
+		call_adventurer(currentPlayer, drawntreasure, cardDrawn, temphand, state, handPos);
 		return 0;
 
 	case smithy:
@@ -1170,16 +1170,18 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   return -1;
 }
 
-int call_adventurer(int currentPlayer, int drawtreasure, int cardDrawn, int temphand[MAX_HAND], struct gameState *state) {
+int call_adventurer(int currentPlayer, int drawtreasure, int cardDrawn, int temphand[MAX_HAND], struct gameState *state, int handPos) {
 	int z=0;
 
-	while(drawtreasure<2){
+  discardCard(handPos, currentPlayer, state, 0);
+  int numLoops = state->deckCount[currentPlayer] + state->discardCount[currentPlayer];
+	while(drawtreasure < 2 && z < numLoops){
 	if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
 	  shuffle(currentPlayer, state);
 	}
 	drawCard(currentPlayer, state);
 	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-	if (cardDrawn == copper || cardDrawn == silver)
+	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
 	  drawtreasure++;
 	else{
 	  temphand[z]=cardDrawn;
@@ -1213,7 +1215,7 @@ int call_village(int currentPlayer, struct gameState *state, int handPos) {
     drawCard(currentPlayer, state);
 
     //+2 Actions
-    state->numActions = state->numActions + 6;
+    state->numActions = state->numActions + 2;
 
     //discard played card from hand
     discardCard(handPos, currentPlayer, state, 0);
