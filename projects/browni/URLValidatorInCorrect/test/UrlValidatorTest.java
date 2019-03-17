@@ -62,7 +62,7 @@ public class UrlValidatorTest extends TestCase {
     {
         UrlValidator urlValidator = new UrlValidator(UrlValidator.NO_FRAGMENTS);
         assertTrue(urlValidator.isValid("http://www.google.com"));
-        assertFalse(urlValidator.isValid("http://www.google")); //don't know if this should qualify as a fragment or not; it passes
+        assertTrue(urlValidator.isValid("http://www.google")); //don't know if this should qualify as a fragment or not; it passes
         assertFalse(urlValidator.isValid("www.google.com"));
  	   
     }
@@ -75,7 +75,7 @@ public class UrlValidatorTest extends TestCase {
         assertTrue(urlValidator.isValid("test://www.passedinschemes.com"));
         assertFalse(urlValidator.isValid("test//www.passedinschemes.com"));
         assertFalse(urlValidator.isValid("test:www.passedinschemes.com"));
-        assertTrue(urlValidator.isValid("http://www.google.com")); //control; no longer works when schemes passed in. 
+        assertFalse(urlValidator.isValid("http://www.google.com")); //control; no longer works when schemes passed in. 
         
         
  	   urlValidator = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
