@@ -1,0 +1,25 @@
+http://,false,scheme only
+https://www.google.com,true,valid https scheme and authority
+http://www.google.com/,true,valid scheme and authority with trailing slash
+lkj;;lkjaeklfjlakjf,false,invalid scheme
+http://www.google.com,true,http scheme
+ftp://www.google.com,true,ftp scheme
+ ,false,single space url
+`,false,single backtick url
+¶,false,single uncommon character url
+a:::,false,multiple ending colons
+file:a,false,file scheme with invalid authority
+file://test.file:,false,file scheme with slashes
+http://www.google.com?key=val,true,url with valid query
+http://www.google.com?,true,empty query
+http://www.google.com? ,false,query with space value
+http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210],true,valid ipv6 address
+http://[aaaa:aaaa:aaaaaaa],false,invalid ipv6 address
+http://google.com:8080,true,valid port
+http://google.com:-1,false,negative port
+http://google.com:65536,false,port number too big
+http://google.com:9999999999999999999999999999999999999,false,port number excessively big
+http://www.google.com/bad////url,false,multiple trailing slashes in path
+http://www.google.com/../,false,url with ..
+http://www.google.com///,false,multiple trailing slashes in authority
+http://www.google.com/test#anchorName,true,valid url fragment
