@@ -78,13 +78,14 @@ public class UrlValidatorTest extends TestCase {
             }
         }
         // result reporting
-        if (fails > 0) {
-        fail("Errors were encountered");
+        
         System.out.println("\nNumber of Bugs: " + fails + "\n");
-        System.out.println("\nGood URLs that failed: \n");
-        for (int j = 0; j < badUrlsGood.length; j++) {
-            if (badUrlsGood[j] != null) {
-                System.out.println(badUrlsGood[j] + "\n");
+        if (fails > 0) {
+            fail("Errors were encountered");
+            System.out.println("\nGood URLs that failed: \n");
+            for (int j = 0; j < badUrlsGood.length; j++) {
+                if (badUrlsGood[j] != null) {
+                    System.out.println(badUrlsGood[j] + "\n");
             }
         }
           
