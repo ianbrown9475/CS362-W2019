@@ -32,25 +32,25 @@ public class UrlValidatorTest extends TestCase {
         int r = 0;
         // set up valid parts
         String[] badUrlsGood = new String[runs];
-        String[] goodSchemes = {"http://", "ftp://", "h3t://"};
+        String[] goodSchemes = {"http://", "ftp://"};
         String[] goodAuthority = {"www.google.com", "google.com", "0.0.0.0", "255.255.255.255"};
         String[] goodPort = {":80", ":9", ":100", "", "65636"};
         String[] goodPath = {"/test1", "/", "/$23", ""};
         String[] goodOptions = {"/test1", "/$23/test1", "", "/test1//file"};
         String[] goodQueries = {"?action=view", ""};
         String[] badUrlsPoor = new String[runs];
-        String[] poorSchemes = {"3ht://", "http:/", "http:"};
+        String[] poorSchemes = {"3ht://", "http:/"};
         String[] poorAuthority = {"256.256.256.256", "1.2.3.4.", "go.a1a", ".aaa"};
         String[] poorPort = {":-1", ":65a", "::-0"};
         String[] poorPath = {"/..", "/../", "/$23", "/test1//file"};
         String[] poorOptions = {"/#", "/../file", "/#/file"};
-
+        String[] poorQueries = {"name?test", "&&&&"};
 
         // picks a random value to use as the number of array to use to build the URL
         System.out.println("\nTesting Known Valid Part Inputs:\n");
         for (int i = 0; i < runs; i++) {
             
-            int schemeInt = (int) (Math.random() * 3);
+            int schemeInt = (int) (Math.random() * 2);
             int authorityInt = (int) (Math.random() * 4);
             int portInt = (int) (Math.random() * 3);
             int pathInt = (int) (Math.random() * 4);
@@ -59,7 +59,7 @@ public class UrlValidatorTest extends TestCase {
 
             // Compose url pieces
             String url = goodSchemes[schemeInt] + goodAuthority[authorityInt] + goodPort[portInt] + goodPath[pathInt] + goodQueries[queriesInt];
-            String urlf = poorSchemes[schemeInt] + poorAuthority[authorityInt] + poorPort[portInt] + poorPath[pathInt] + goodQueries[queriesInt];
+            String urlf = poorSchemes[schemeInt] + poorAuthority[authorityInt] + poorPort[portInt] + poorPath[pathInt] + poorQueries[queriesInt];
             UrlValidator validator = new UrlValidator();
 
             
@@ -81,7 +81,6 @@ public class UrlValidatorTest extends TestCase {
         
         System.out.println("\nNumber of Bugs: " + fails + "\n");
         if (fails > 0) {
-            fail("Errors were encountered");
             System.out.println("\nGood URLs that failed: \n");
             for (int j = 0; j < badUrlsGood.length; j++) {
                 if (badUrlsGood[j] != null) {
@@ -95,7 +94,8 @@ public class UrlValidatorTest extends TestCase {
                 System.out.println(badUrlsPoor[s] + "\n");
           }
        }
-     }
+     fail("Errors were encountered");
+        }
    }
 
     /**
