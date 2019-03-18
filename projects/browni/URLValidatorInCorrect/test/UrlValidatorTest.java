@@ -33,7 +33,7 @@ public class UrlValidatorTest extends TestCase {
         // set up valid parts
         String[] badUrlsGood = new String[runs];
         String[] goodSchemes = {"http://", "ftp://", "h3t://"};
-        String[] goodAuthority = {"www.google.com", "google.com", "0.0.0.0", "255.255.255.255", "go.cc"};
+        String[] goodAuthority = {"www.google.com", "google.com", "0.0.0.0", "255.255.255.255"};
         String[] goodPort = {":80", ":9", ":100", "", "65636"};
         String[] goodPath = {"/test1", "/", "/$23", ""};
         String[] goodOptions = {"/test1", "/$23/test1", "", "/test1//file"};
@@ -50,10 +50,10 @@ public class UrlValidatorTest extends TestCase {
         System.out.println("\nTesting Known Valid Part Inputs:\n");
         for (int i = 0; i < runs; i++) {
             
-            int schemeInt = (int) (Math.random() * 2);
-            int authorityInt = (int) (Math.random() * 2);
+            int schemeInt = (int) (Math.random() * 3);
+            int authorityInt = (int) (Math.random() * 4);
             int portInt = (int) (Math.random() * 3);
-            int pathInt = (int) (Math.random() * 2);
+            int pathInt = (int) (Math.random() * 4);
             int optionsInt = (int) (Math.random() * 3);
             int queriesInt = (int) (Math.random() * 2);
 
@@ -78,6 +78,8 @@ public class UrlValidatorTest extends TestCase {
             }
         }
         // result reporting
+        if (fails > 0) {
+        fail("Errors were encountered");
         System.out.println("\nNumber of Bugs: " + fails + "\n");
         System.out.println("\nGood URLs that failed: \n");
         for (int j = 0; j < badUrlsGood.length; j++) {
@@ -85,13 +87,17 @@ public class UrlValidatorTest extends TestCase {
                 System.out.println(badUrlsGood[j] + "\n");
             }
         }
+        }
+        if (fails > 0) {
+        fail("Errors were encountered");
         System.out.println("\nPoor URLs that passed: \n");
         for (int s = 0; s < badUrlsPoor.length; s++) {
             if (badUrlsPoor[s] != null) {
                 System.out.println(badUrlsPoor[s] + "\n");
             }
         }
-    }
+        }
+        }
 
     /**
      * Programming based testing
