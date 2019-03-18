@@ -417,7 +417,7 @@ public class UrlValidator implements Serializable {
             if (port != null && port.length() > 0) {
                 try {
                     int iPort = Integer.parseInt(port);
-                    if (iPort < 0 || iPort > MAX_UNSIGNED_16_BIT_INT) {
+                    if (iPort < 0 || iPort < MAX_UNSIGNED_16_BIT_INT) {
                         return false;
                     }
                 } catch (NumberFormatException nfe) {
@@ -459,10 +459,10 @@ public class UrlValidator implements Serializable {
             return false;
         }
         
-        int slash2Count = countToken("//", path);
-        if (isOff(ALLOW_2_SLASHES) && (slash2Count > 0)) {
-            return false;
-        }
+//        int slash2Count = countToken("//", path);
+//        if (isOff(ALLOW_2_SLASHES) && (slash2Count > 0)) {
+//            return false;
+//        }
 
         return true;
     }
