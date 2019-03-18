@@ -80,13 +80,13 @@ public class UrlValidatorTest extends TestCase {
         // result reporting
         System.out.println("\nNumber of Bugs: " + fails + "\n");
         System.out.println("\nGood URLs that failed: \n");
-        for (int j = 0; j < badUrlsGood.runs; j++) {
+        for (int j = 0; j < badUrlsGood.length; j++) {
             if (badUrlsGood[j] != null) {
                 System.out.println(badUrlsGood[j] + "\n");
             }
         }
         System.out.println("\nPoor URLs that passed: \n");
-        for (int s = 0; s < badUrlsPoor.runs; s++) {
+        for (int s = 0; s < badUrlsPoor.length; s++) {
             if (badUrlsGood[s] != null) {
                 System.out.println(badUrlsPoor[s] + "\n");
             }
