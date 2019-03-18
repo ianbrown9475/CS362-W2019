@@ -32,7 +32,7 @@ public class UrlValidatorTest extends TestCase {
         int r = 0;
         // set up valid parts
         String[] badUrlsGood = new String[runs];
-        String[] goodSchemes = {"http://", "", "ftp://", "h3t://"};
+        String[] goodSchemes = {"http://", "ftp://", "h3t://"};
         String[] goodAuthority = {"www.google.com", "google.com", "0.0.0.0", "255.255.255.255", "go.cc"};
         String[] goodPort = {":80", ":9", ":100", "", "65636"};
         String[] goodPath = {"/test1", "/", "/$23", ""};
@@ -87,7 +87,7 @@ public class UrlValidatorTest extends TestCase {
         }
         System.out.println("\nPoor URLs that passed: \n");
         for (int s = 0; s < badUrlsPoor.length; s++) {
-            if (badUrlsGood[s] != null) {
+            if (badUrlsPoor[s] != null) {
                 System.out.println(badUrlsPoor[s] + "\n");
             }
         }
