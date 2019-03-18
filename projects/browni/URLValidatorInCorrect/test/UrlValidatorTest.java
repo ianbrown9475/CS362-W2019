@@ -111,14 +111,78 @@ public class UrlValidatorTest extends TestCase {
     
     /*end manual testing functions*/
 
-    public void testYourFirstPartition() {
-        // You can use this function to implement your First Partition testing
-    }
+    public void testRandomTest() {
+        int fails = 0;
+        int runs = 10;    //Number of tests to run 
+        int k = 0;
+        int r = 0;
+        // set up valid parts
+        String[] badUrlsGood = new String[runs];
+        String[] goodSchemes = {"http://", "ftp://"};
+        String[] goodAuthority = {"www.google.com", "google.com", "0.0.0.0", "255.255.255.255"};
+        String[] goodPort = {":80", ":9", ":100", "", "65636"};
+        String[] goodPath = {"/test1", "/", "/$23", ""};
+        String[] goodOptions = {"/test1", "/$23/test1", "", "/test1//file"};
+        String[] goodQueries = {"?action=view", ""};
+        String[] badUrlsPoor = new String[runs];
+        String[] poorSchemes = {"3ht://", "http:/"};
+        String[] poorAuthority = {"256.256.256.256", "1.2.3.4.", "go.a1a", ".aaa"};
+        String[] poorPort = {":-1", ":65a", ":66666"};
+        String[] poorPath = {"/..", "/../", "/$23", "/test1//file"};
+        String[] poorOptions = {"/#", "/../file", "/#/file"};
+        String[] poorQueries = {"name?test", "&&&&"};
 
-    public void testYourSecondPartition() {
-        // You can use this function to implement your Second Partition testing
-    }
-    // You need to create more test cases for your Partitions if you need to
+        // picks a random value to use as the number of array to use to build the URL
+        System.out.println("\nTesting Known Valid Part Inputs:\n");
+        for (int i = 0; i < runs; i++) {
+            
+            int schemeInt = (int) (Math.random() * 2);
+            int authorityInt = (int) (Math.random() * 4);
+            int portInt = (int) (Math.random() * 3);
+            int pathInt = (int) (Math.random() * 4);
+            int optionsInt = (int) (Math.random() * 3);
+            int queriesInt = (int) (Math.random() * 2);
+
+            // Compose url pieces
+            String url = goodSchemes[schemeInt] + goodAuthority[authorityInt] + goodPort[portInt] + goodPath[pathInt] + goodQueries[queriesInt];
+            String urlf = poorSchemes[schemeInt] + poorAuthority[authorityInt] + poorPort[portInt] + poorPath[pathInt] + poorQueries[queriesInt];
+            UrlValidator validator = new UrlValidator();
+
+            
+            boolean valid = validator.isValid(url);
+            boolean valid2 = validator.isValid(urlf);
+            // if not valid, increase fail count and store url
+            if (valid == false) {
+                fails++;
+                badUrlsGood[k] = url;
+                k++;
+            }
+            if (valid2 == true) {
+                fails++;
+                badUrlsPoor[r] = urlf;
+                r++;
+            }
+        }
+        // result reporting
+        
+        System.out.println("\nNumber of Bugs: " + fails + "\n");
+        if (fails > 0) {
+            System.out.println("\nGood URLs that failed: \n");
+            for (int j = 0; j < badUrlsGood.length; j++) {
+                if (badUrlsGood[j] != null) {
+                    System.out.println(badUrlsGood[j] + "\n");
+            }
+        }
+          
+        System.out.println("\nPoor URLs that passed: \n");
+        for (int s = 0; s < badUrlsPoor.length; s++) {
+            if (badUrlsPoor[s] != null) {
+                System.out.println(badUrlsPoor[s] + "\n");
+          }
+       }
+     fail("Errors were encountered");
+        }
+   }
 
     /**
      * Programming based testing
