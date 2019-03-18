@@ -41,7 +41,7 @@ public class UrlValidatorTest extends TestCase {
         String[] badUrlsPoor = new String[runs];
         String[] poorSchemes = {"3ht://", "http:/"};
         String[] poorAuthority = {"256.256.256.256", "1.2.3.4.", "go.a1a", ".aaa"};
-        String[] poorPort = {":-1", ":65a", "::-0"};
+        String[] poorPort = {":-1", ":65a", ":66666"};
         String[] poorPath = {"/..", "/../", "/$23", "/test1//file"};
         String[] poorOptions = {"/#", "/../file", "/#/file"};
         String[] poorQueries = {"name?test", "&&&&"};
